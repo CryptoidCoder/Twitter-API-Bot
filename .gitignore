@@ -8,3 +8,6 @@ Passes.py
 #Logs/Other Stuff
 .log
 __pycache__
+
+#Special for this repo;
+followers.txt
