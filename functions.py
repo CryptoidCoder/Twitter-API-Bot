@@ -23,7 +23,7 @@ auth.set_access_token(Access_token,Access_token_secret)
 
 api = tweepy.API(auth)
 
-me = tweepy.API.verify_credentials()
+me = api.verify_credentials()
 
 #get recipient id
 def recipientid(user):
@@ -103,10 +103,14 @@ def listblockedusers():
 def getfollowers(username):
     # this wil get the followers of the specified user
     user = api.get_user(screen_name=username)
+    listofusernames = None
     for follower in user.followers():
         print("Name: "+ follower.name)
         print("Username: " + follower.screen_name)
         print("")
+        listofusernames = f"{listofusernames}, {follower.screen_name}"
+        listofusernames = listofusernames.replace('None, ', '')
+    return listofusernames
 
 #fetch last 10 tweets with certain text in them
 def search(text):
