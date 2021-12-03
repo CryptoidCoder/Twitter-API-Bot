@@ -99,8 +99,18 @@ def listblockedusers():
     for block in api.blocks():
         print(block.name)
 
-# list followers of a certain user
+# get followers of a certain user (return only)
 def getfollowers(username):
+    # this wil get the followers of the specified user
+    user = api.get_user(screen_name=username)
+    listofusernames = None
+    for follower in user.followers():
+        listofusernames = f"{listofusernames}, {follower.screen_name}"
+        listofusernames = listofusernames.replace('None, ', '')
+    return listofusernames
+
+# get followers of a certain user (printout)
+def listfollowers(username):
     # this wil get the followers of the specified user
     user = api.get_user(screen_name=username)
     listofusernames = None
