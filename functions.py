@@ -59,45 +59,50 @@ def tweetimagewithurl(imageurl, text):
 #tweet from the que.txt file
 def tweetfromque():
     global firstline, secondline, tweetimageurl, tweetmessage
-    #open que.txt
-    file = open("que.txt")
 
-    #set strigns to None to start with
-    tweetimageurl = None
-    tweetmessage = None
+    try:
+        #open que.txt
+        file = open("que.txt")
 
-    file.seek(0) #go to the beginning of the que file
-    firstline = file.readline() #save the first line as firstline
+        #set strigns to None to start with
+        tweetimageurl = None
+        tweetmessage = None
+
+        file.seek(0) #go to the beginning of the que file
+        firstline = file.readline() #save the first line as firstline
 
 
-    if firstline.startswith("{image}"): #if {image} tag in line then remove it and save remaining url
-        firstline = firstline.replace('{image}', '')
-        tweetimageurl = firstline
-        secondline = file.readline()
-        tweetmessage = secondline
+        if firstline.startswith("{image}"): #if {image} tag in line then remove it and save remaining url
+            firstline = firstline.replace('{image}', '')
+            tweetimageurl = firstline
+            secondline = file.readline()
+            tweetmessage = secondline
 
-        #delete used lines:
-        lines = []# list to store file lines
+            #delete used lines:
+            lines = []# list to store file lines
 
-        with open(r"que.txt", 'w') as fp:
-            lines = fp.readlines()# read and store all lines into list
+            with open(r"que.txt", 'w') as fp:
+                lines = fp.readlines()# read and store all lines into list
+                
+                for number, line in enumerate(lines):# wipe lines 1 & 2 (0,1)
+                    if number not in [0, 1]:
+                        fp.write(line)
+                fp.close() #close file
+
+
+        else: #if no {image} tag at beginning of the line, save as just tweetmessage
+            tweetmessage = firstline
+
+        if tweetimageurl != None: #if imageurl provided (if posting image) then do so
+            tweetimagewithurl(tweetimageurl,tweetmessage)
             
-            for number, line in enumerate(lines):# wipe lines 1 & 2 (0,1)
-                if number not in [0, 1]:
-                    fp.write(line)
-            fp.close() #close file
+        else:#if imageurl not provided (if not posting image) then do so
+            tweet(tweetmessage)
 
+        file.close()#close file
 
-    else: #if no {image} tag at beginning of the line, save as just tweetmessage
-        tweetmessage = firstline
-
-    if tweetimageurl != None: #if imageurl provided (if posting image) then do so
-        tweetimagewithurl(tweetimageurl,tweetmessage)
-        
-    else:#if imageurl not provided (if not posting image) then do so
-        tweet(tweetmessage)
-
-    file.close()#close file
+    except:
+        tweet("Unable To Post From The Que, Today You Get This Message As A Tweet")
 
 #dm someone text-only
 def directmessage(user, text):
