@@ -29,9 +29,11 @@ def comparelists(word_list, removal_list): #comparelists(current_followers, old_
 
 #PsuedoCode for checking if any new followers:
 def checknewfollowers():
+    print(f'Checking New Followers @ {datetime.now().strftime("%H:%M:%S")}')
     #sort out variables /strings / lists
     global current_followers #make changes to current_followers globally
     global new_followers #make changes to new_followers globally
+    newfollowerslist = None
     current_followers = list(current_followers.split(", ")) #convert string to list
     
     new_followers = functions.getfollowers(me) #get new updated list of followers
@@ -49,7 +51,7 @@ def checknewfollowers():
 schedule.every().day.at("12:30").do(functions.tweetfromque)
 schedule.every(1).minutes.do(checknewfollowers) #every 2 minutes check if new followers
 
-print(datetime.now().strftime("%H:%M:%S"))
+print(f'Datetime Now: {datetime.now().strftime("%H:%M:%S")}')
 current_followers = functions.getfollowers(me) #save the first set of followers in a list
 while True:
     schedule.run_pending() #start all functions scheduled
