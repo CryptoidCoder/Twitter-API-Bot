@@ -27,11 +27,11 @@ def checknewfollowers():
     global current_followers #make changes to current_followers globally
     global new_followers #make changes to new_followers globally
     current_followers = list(current_followers.split(", ")) #convert string to list
-    print(f"Current Followers: {current_followers}")
+    print(f"{datetime.now().strftime('%H:%M:%S')} Current Followers: {current_followers}")
     
     new_followers = functions.getfollowers(me) #get new updated list of followers
     new_followers = list(new_followers.split(", ")) #convert string to list
-    print(f"New Followers: {new_followers}")
+    print(f"{datetime.now().strftime('%H:%M:%S')} New Followers: {new_followers}")
 
     comparelists(new_followers, current_followers)
     current_followers = new_followers #make the current "new followers" list into the "old followers list"
@@ -39,11 +39,19 @@ def checknewfollowers():
         print(f"New Users Following me = {newfollowerslist}")
         for new_follower in newfollowerslist: #for each new follower shout them out in a tweet
             functions.tweet(f"Welcome @{new_follower} to the {me} Twitter Page - Thanks For The Follow")
-            print(f"Tweeting: 'Welcome @{new_follower} to the {me} Twitter Page - Thanks For The Follow'")
+            print(f"{datetime.now().strftime('%H:%M:%S')} Tweeting: 'Welcome @{new_follower} to the {me} Twitter Page - Thanks For The Follow'")
+
+    #turn current_followers back into a string so no errors
+    string_current_followers=""
+    for user in current_followers:
+        string_current_followers=string_current_followers+", "+user
+    print(f"string_current_followers = {string_current_followers}")
+    current_followers = string_current_followers
+    
 
 
 #schedule.every().day.at("12:30").do(tweet) #at 12:30 every day tweet a message
-schedule.every().day.at("12:30").do(functions.tweetfromque)
+schedule.every().day.at("19:16").do(functions.tweetfromque)
 schedule.every(1).minutes.do(checknewfollowers) #every 2 minutes check if new followers
 
 print(f'Starting Datetime: {datetime.now().strftime("%H:%M:%S")}')

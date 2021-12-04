@@ -13,7 +13,7 @@ __pycache__
 commit.txt
 
 #Virtual Environments
-#venv
+.\venv
 
 #Specific to this project
 que.txt

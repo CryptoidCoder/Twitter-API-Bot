@@ -2,6 +2,7 @@ import tweepy
 import requests
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 
@@ -43,7 +44,7 @@ def tweettestmessage(): #tweet an automatic tweet message
     tweetmessage = f'This Is An Automagic Tweet From https://github.com/CryptoidCoder/Twitter-API-Bot/tree/cloudrun Running on Python Anywhere @ {datetime.now().strftime("%H:%M")}'
     print(f"Tweeting: {tweetmessage}")
     print()
-    functions.tweet(tweetmessage)
+    tweet(tweetmessage)
 
 #tweet a text-only message
 def tweet(text):
@@ -88,7 +89,7 @@ def tweetfromque():
             #delete used lines:
             lines = []# list to store file lines
 
-            with open(r"que.txt", 'w') as fp:
+            with open(r"que.txt", 'w+') as fp:
                 lines = fp.readlines()# read and store all lines into list
                 
                 for number, line in enumerate(lines):# wipe lines 1 & 2 (0,1)
@@ -96,20 +97,29 @@ def tweetfromque():
                         fp.write(line)
                 fp.close() #close file
 
-
         else: #if no {image} tag at beginning of the line, save as just tweetmessage
             tweetmessage = firstline
 
-        if tweetimageurl != None: #if imageurl provided (if posting image) then do so
-            tweetimagewithurl(tweetimageurl,tweetmessage)
+        if tweetmessage == None or tweetmessage == '':
+            print(f"{datetime.now().strftime('%H:%M:%S')} Unable To Post From The Que, Today You Get This Message As A Tweet")
+            tweet(f"Unable To Post From The Que, Today({datetime.now().strftime('%D @ %H:%M:%S')}) You Get This Message As A Tweet")
             
-        else:#if imageurl not provided (if not posting image) then do so
-            tweet(tweetmessage)
+        else: #if tweetmessage exists
+            if tweetimageurl != None: #if imageurl provided (if posting image) then do so
+                print(f"{datetime.now().strftime('%H:%M:%S')} Tweeted Image : {tweetimageurl} + Caption : {tweetmessage}")
+                tweetimagewithurl(tweetimageurl,tweetmessage)
+                
+            elif tweetimageurl == None:#if imageurl not provided (if not posting image) then do so
+                print(f"{datetime.now().strftime('%H:%M:%S')} Tweeted Message : {tweetmessage}")
+                tweet(tweetmessage)
+
+
 
         file.close()#close file
 
     except:
-        tweet("Unable To Post From The Que, Today You Get This Message As A Tweet")
+        print(f"{datetime.now().strftime('%H:%M:%S')} [Caught the exception - line 120 functions.py] Unable To Post From The Que, Today You Get This Message As A Tweet")
+        tweet(f"Unable To Post From The Que, Today({datetime.now().strftime('%D @ %H:%M:%S')}) You Get This Message As A Tweet")
 
 #dm someone text-only
 def directmessage(user, text):
