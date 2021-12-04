@@ -46,6 +46,7 @@ def checknewfollowers():
 
 
 #schedule.every().day.at("12:30").do(tweet) #at 12:30 every day tweet a message
+schedule.every().day.at("12:30").do(functions.tweetfromque)
 schedule.every(1).minutes.do(checknewfollowers) #every 2 minutes check if new followers
 
 print(datetime.now().strftime("%H:%M:%S"))

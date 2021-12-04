@@ -41,11 +41,63 @@ def timeline():
 #tweet a text-only message
 def tweet(text):
     # The following code uses Tweepy to create a tweet with some text:
-    api.update_status(text)
+    api.update_status(status=text)
 
 #tweets message with image
 def tweetimage(pathtoimage, text):
-    api.update_with_media(pathtoimage,text)
+    api.update_status_with_media(filename=pathtoimage,status=text)
+
+#tweets message with image url
+def tweetimagewithurl(imageurl, text):
+    mediapath = '.\\images\\animage.png'
+    myfile = requests.get(imageurl)
+    open(mediapath, 'wb').write(myfile.content)
+    uploadedmedia = api.media_upload(filename=mediapath)
+    api.update_status_with_media(filename=mediapath,status=text)
+    os.remove(mediapath)
+
+#tweet from the que.txt file
+def tweetfromque():
+    global firstline, secondline, tweetimageurl, tweetmessage
+    #open que.txt
+    file = open("que.txt")
+
+    #set strigns to None to start with
+    tweetimageurl = None
+    tweetmessage = None
+
+    file.seek(0) #go to the beginning of the que file
+    firstline = file.readline() #save the first line as firstline
+
+
+    if firstline.startswith("{image}"): #if {image} tag in line then remove it and save remaining url
+        firstline = firstline.replace('{image}', '')
+        tweetimageurl = firstline
+        secondline = file.readline()
+        tweetmessage = secondline
+
+        #delete used lines:
+        lines = []# list to store file lines
+
+        with open(r"que.txt", 'w') as fp:
+            lines = fp.readlines()# read and store all lines into list
+            
+            for number, line in enumerate(lines):# wipe lines 1 & 2 (0,1)
+                if number not in [0, 1]:
+                    fp.write(line)
+            fp.close() #close file
+
+
+    else: #if no {image} tag at beginning of the line, save as just tweetmessage
+        tweetmessage = firstline
+
+    if tweetimageurl != None: #if imageurl provided (if posting image) then do so
+        tweetimagewithurl(tweetimageurl,tweetmessage)
+        
+    else:#if imageurl not provided (if not posting image) then do so
+        tweet(tweetmessage)
+
+    file.close()#close file
 
 #dm someone text-only
 def directmessage(user, text):
@@ -53,7 +105,7 @@ def directmessage(user, text):
 
 #dm someone attachment
 def directmessageattachment(user,text,url):
-    mediapath = '/home/CryptoidCoder/tweepy-bots/images/media'
+    mediapath = './images'
     myfile = requests.get(url)
     open(mediapath, 'wb').write(myfile.content)
     uploadedmedia = api.media_upload(filename=mediapath)
@@ -78,7 +130,6 @@ def userinfo(username):
 def follow(user):
     # This code shows how you can use Tweepy to start following a user:
     api.create_friendship(user)
-
 
 #update profile description
 def updatedescription(text):
