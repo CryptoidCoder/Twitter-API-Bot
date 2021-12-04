@@ -13,6 +13,8 @@ me = os.getenv("my_username")
 
 def comparelists(word_list, removal_list): #comparelists(current_followers, old_followers)
     global newfollowerslist
+    global originalfollowerlist
+    originalfollowerlist = word_list
     newfollowerslist = None #wipe new follower list
     for word in removal_list: #remove each word in removal_list from word_list
         word_list.remove(word)
@@ -44,14 +46,15 @@ def checknewfollowers():
     #turn current_followers back into a string so no errors
     string_current_followers=""
     for user in current_followers:
-        string_current_followers=string_current_followers+", "+user
-    print(f"string_current_followers = {string_current_followers}")
+        string_current_followers=string_current_followers+user+", "
+        print(f"added {user} to string_current_followers: {string_current_followers}")
     current_followers = string_current_followers
+    print(f"current_followers after list->string conversion: {current_followers}")
     
 
 
 #schedule.every().day.at("12:30").do(tweet) #at 12:30 every day tweet a message
-schedule.every().day.at("19:16apt-get update").do(functions.tweetfromque)
+schedule.every().day.at("19:45").do(functions.tweetfromque)
 schedule.every(1).minutes.do(checknewfollowers) #every 2 minutes check if new followers
 
 print(f'Starting Datetime: {datetime.now().strftime("%H:%M:%S")}')
