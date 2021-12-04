@@ -38,6 +38,13 @@ def timeline():
     for tweet in timeline:
         print(f"{tweet.user.name} said {tweet.text}")
 
+#tweet a test message
+def tweettestmessage(): #tweet an automatic tweet message
+    tweetmessage = f'This Is An Automagic Tweet From https://github.com/CryptoidCoder/Twitter-API-Bot/tree/cloudrun Running on Python Anywhere @ {datetime.now().strftime("%H:%M")}'
+    print(f"Tweeting: {tweetmessage}")
+    print()
+    functions.tweet(tweetmessage)
+
 #tweet a text-only message
 def tweet(text):
     # The following code uses Tweepy to create a tweet with some text:
