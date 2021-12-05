@@ -216,13 +216,14 @@ def checknewfollowers():
     if unfollowers_list == None or unfollowers_list == 'None':
         unfollowers_list == []
 
-    if unfollowers_list == [] and new_followers_list == []:
-        print(f"{datetime.now().strftime('%H:%M:%S')} - Account Stayed The Same.")
-    elif unfollowers_list != []:
+    '''if unfollowers_list == [] and new_followers_list == []:
+        print(f"{datetime.now().strftime('%H:%M:%S')} - Account Stayed The Same.")'''
+    
+    if unfollowers_list != []:
         for user in unfollowers_list:
             print(f"{datetime.now().strftime('%H:%M:%S')} - {user} unfollowed you :(")
             tweet(f"So Sorry To see You Go @{user} :( 👋")
-    elif new_followers_list != []:
+    if new_followers_list != []:
         for user in new_followers_list:
             print(f"{datetime.now().strftime('%H:%M:%S')} - {user} followed you :))")
             tweet(f"Yay, Welcome To The Gang @{user} 👋,\n To See My Work Visit https://github.com/CryptoidCoder/")
