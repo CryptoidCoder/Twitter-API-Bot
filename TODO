@@ -1,4 +1,4 @@
 add date & time functionality for que tweets.
-add more logging functionality
-fix the error of people unfollowing
-create "windowsvenv" & "linuxvenv"
+
+deploy it to heroku and run it there.
+create a deploy to heroku button
