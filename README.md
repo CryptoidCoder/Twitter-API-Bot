@@ -5,6 +5,12 @@ This projects is so that I can use the Twitter API
 Currently it will be used for messaging new followers & posting daily.
 - Hosted on [pythonanywhere](https://www.pythonanywhere.com)
 
+
+## To Run:
+1) Create `.env` and fill in with appropriate details (API & Access keys, twitter username)
+2) Run `setup.py` to setup virtual environments & pip installs
+3) Run `main.py` to start the bot. (Remember to do this through the virtual environment)
+
 ### Files:
 - `authenticationtest.py` {This will make sure your api keys are working and the .env is formatted correctly.}
 - `functions.py` {This is where all of my functions are, tweet() etc.}

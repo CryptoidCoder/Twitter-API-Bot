@@ -8,11 +8,13 @@ Passes.py
 #Python Caches
 __pycache__
 .pyc
+#pyvenv.cfg
 
 #commits
 commit.txt
 
 #Virtual Environments
+venv
 windowsvenv
 linuxvenv
 
