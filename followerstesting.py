@@ -36,7 +36,6 @@ def checknewfollowers():
     copy_new_followers_list = new_followers_list #duplicate new_followers_list
     copy_new_followers_list = list(copy_new_followers_list.split(", ")) #convert string to list
     new_followers_list = list(new_followers_list.split(", ")) #convert string to list
-    #previous_followers_list = list(previous_followers_list.split(", ")) #convert string to list
 
     for user in previous_followers_list: #for each user in previous list remove them from new list, if it doesnt work then they have unfollowed
         try:
@@ -60,6 +59,7 @@ def checknewfollowers():
         for user in new_followers_list:
             print(f"{datetime.now().strftime('%H:%M:%S')} - {new_followers_list} followed you :))")
             functions.tweet(f"Yay, Welcome To The Gang @{user} 👋,\n To See My Work Visit https://github.com/CryptoidCoder/")
+
 
     previous_followers_list = copy_new_followers_list #set previous as the current for next time
 

@@ -15,16 +15,13 @@ Access_token_secret = os.getenv("Access_token_secret")
 auth = tweepy.OAuthHandler(API_key,API_key_secret)
 auth.set_access_token(Access_token,Access_token_secret)
 
-
-
-
 # Create API object
-#api = tweepy.API(auth, wait_on_rate_limit=True,
-#    wait_on_rate_limit_notify=True)
-
 api = tweepy.API(auth)
 
-me = api.verify_credentials()
+me = os.getenv("my_username")
+
+
+
 
 #get recipient id
 def recipientid(user):
@@ -195,6 +192,44 @@ def listfollowers(username):
         listofusernames = listofusernames.replace('None, ', '')
     return listofusernames
 
+#check for new followers & new unfollowers
+def checknewfollowers():
+    global previous_followers_list
+    global unfollowers_list
+    unfollowers_list = [] #wipe unfollowers list    
+
+    #get current follower list - save as changing variable new_followers_list
+    new_followers_list = getfollowers(me) #save the second set of followers in a list
+    copy_new_followers_list = new_followers_list #duplicate new_followers_list
+    copy_new_followers_list = list(copy_new_followers_list.split(", ")) #convert string to list
+    new_followers_list = list(new_followers_list.split(", ")) #convert string to list
+
+    for user in previous_followers_list: #for each user in previous list remove them from new list, if it doesnt work then they have unfollowed
+        try:
+            new_followers_list.remove(user)
+        except:
+            unfolloweduser = f"{user}"
+            unfollowers_list.append(unfolloweduser)
+
+
+    print()
+    if unfollowers_list == None or unfollowers_list == 'None':
+        unfollowers_list == []
+
+    if unfollowers_list == [] and new_followers_list == []:
+        print(f"{datetime.now().strftime('%H:%M:%S')} - Account Stayed The Same.")
+    elif unfollowers_list != []:
+        for user in unfollowers_list:
+            print(f"{datetime.now().strftime('%H:%M:%S')} - {user} unfollowed you :(")
+            tweet(f"So Sorry To see You Go @{user} :( 👋")
+    elif new_followers_list != []:
+        for user in new_followers_list:
+            print(f"{datetime.now().strftime('%H:%M:%S')} - {user} followed you :))")
+            tweet(f"Yay, Welcome To The Gang @{user} 👋,\n To See My Work Visit https://github.com/CryptoidCoder/")
+
+
+    previous_followers_list = copy_new_followers_list #set previous as the current for next time
+    
 #fetch last 10 tweets with certain text in them
 def search(text):
     # For example, you can try this code to get the 10 most recent public tweets that are in English and contain a certain word:
@@ -221,3 +256,12 @@ def fetchitems(number):
     # This code shows how, by using a cursor, you can get not only the first page from your timeline, but also the last however many tweets:
     for tweet in tweepy.Cursor(api.home_timeline).items(number):
         print(f"{tweet.user.name} said: {tweet.text}")
+
+
+#Definitions@
+#get current follower list - save as static variable original_followers_list
+original_followers_list = getfollowers(me) #save the first set of followers in a list
+
+#duplicate into a changing variable - previous_followers_list
+previous_followers_list = original_followers_list
+previous_followers_list = list(previous_followers_list.split(", ")) #convert string to list
