@@ -11,19 +11,19 @@
     "logo": "https://github.com/CryptoidCoder/Twitter-API-Bot/raw/heroku/images/python-logo.jfif",
     "env": {
       "API_key": {
-        "description": "Twitter API Key",
+        "description": "Twitter API Key (Consumer Key)",
         "value": "Twitter-API-Key-Here"
       },
       "API_key_secret": {
-        "description": "Twitter API Key Secret",
+        "description": "Twitter API Key Secret (Consumer Secret)",
         "value": "Twitter-API-Key-Secret-Here"
       },
       "API_token": {
-        "description": "Twitter API Token",
+        "description": "Twitter API Token (Access Token)",
         "value": "Twitter-API-Token-Here"
       },
       "API_token_secret": {
-        "description": "Twitter API Token Secret",
+        "description": "Twitter API Token Secret (Access Token Secret)",
         "value": "Twitter-API-Token-Secret-Here"
       }
     }
