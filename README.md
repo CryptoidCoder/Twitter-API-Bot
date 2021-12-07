@@ -3,32 +3,33 @@
 This projects is so that I can use the Twitter API
 
 Currently it will be used for messaging new followers & posting daily.
-- Hosted on [pythonanywhere](https://www.pythonanywhere.com)
+- Hosted on [heroku](https://www.heroku.com)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## To Run:
-1) Create `.env` and fill in with appropriate details (API & Access keys, twitter username)
-2) Run `setup.py` to setup virtual environments & pip installs
-3) Run `main.py` to start the bot. (Remember to do this through the virtual environment)
+1) Deploy to heroku (use the button above / clone the repo and deploy your own way).
+2) Fill in environment variables with appropriate details (API & Access keys, twitter username) [Link On How-To Here](https://catalins.tech/heroku-environment-variables).
+4) Make sure the `worker: python main.py` & `web: python server.py` is turned on on the app dashboard.
 
 ### Files:
-- `authenticationtest.py` {This will make sure your api keys are working and the .env is formatted correctly.}
-- `functions.py` {This is where all of my functions are, tweet() etc.}
-- `main.py` {this will schedule tasks to happen (tweets / new follower checks)}
+- `functions.py` {This is where all of my functions are, tweet() etc}.
+- `main.py` {This will schedule tasks to happen (tweets / new follower checks)}.
+- `server.py` {This will run a `Hello World server for heroku`}.
 
-### Format of the `.env`:
+### Format of the `Environment Variables`:
 ```
-#API keys:
-API_key = "xxxxxxxxxxxxxxxxxxxxxxxxx"
-API_key_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Key:API_key, Value:"xxxxxxxxxxxxxxxxxxxxxxxxx"
+Key:API_key_secret, Value:"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-Access_token = "xxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-Access_token_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Key:Access_token, Value:"xxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Key:Access_token_secret, Value:"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-my_username = 'xxxxx'
+Key:my_username, Value:'xxxxx'
 
 ```
 
+<!--
 ### Format of the `que.txt`:
 tweet & image:
 - {image}https://web-location-of-image-you-want-to-tweet.com/image.png
@@ -42,6 +43,7 @@ This is an automated tweet using tweepy that takes a url and text and automatica
 Today it'll just be a tweet
 
 ```
+-->
 
 You will need to create the twitter developer application and give it `Read, Write, Direct Message` permissions.
 

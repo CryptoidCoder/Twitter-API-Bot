@@ -14,9 +14,6 @@ __pycache__
 commit.txt
 
 #Virtual Environments
-venv
-windowsvenv
-linuxvenv
+
 
 #Specific to this project
-que.txt
