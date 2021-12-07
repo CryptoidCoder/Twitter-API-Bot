@@ -1,18 +1,14 @@
 import tweepy
 import requests
 import os
-#from dotenv import load_dotenv
-from os import environ
 from datetime import datetime
 
-#load_dotenv()
 
 
-
-API_key = environ['API_key']
-API_key_secret = environ['API_key_secret']
-Access_token = environ['Access_token']
-Access_token_secret = environ['Access_token_secret']
+API_key = os.environ['API_key']
+API_key_secret = os.environ['API_key_secret']
+Access_token = os.environ['Access_token']
+Access_token_secret = os.environ['Access_token_secret']
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler(API_key,API_key_secret)
@@ -21,7 +17,7 @@ auth.set_access_token(Access_token,Access_token_secret)
 # Create API object
 api = tweepy.API(auth)
 
-me = environ['my_username']
+me = os.environ['my_username']
 
 
 

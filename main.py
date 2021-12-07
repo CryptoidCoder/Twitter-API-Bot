@@ -5,9 +5,8 @@ import time
 from datetime import datetime
 
 import os
-from os import environ
 
-me = environ['my_username']
+me = os.environ['my_username']
 
 
 schedule.every().day.at("12:30").do(functions.tweetfromque) #at 12:30 every day tweet a message
