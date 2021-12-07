@@ -1,0 +1,7 @@
+{
+    "name": "CryptoidCoders-Twitter-Bot",
+    "description": "A Twitter Bot Coded In Python For Detecting Followers/Unfollowers & Tweeting At Set Times",
+    "repository": "https://github.com/CryptoidCoder/Twitter-API-Bot/tree/heroku",
+    "logo": "https://github.com/CryptoidCoder/Twitter-API-Bot/raw/heroku/images/python-logo.jfif",
+    "keywords": ["python", "twitter", "twitter-api"]
+  }
