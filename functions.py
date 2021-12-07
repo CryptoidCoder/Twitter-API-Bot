@@ -38,7 +38,7 @@ def timeline():
 #tweet a test message
 def tweettestmessage(): #tweet an automatic tweet message
     tweetmessage = f'This Is An Automagic Tweet From https://github.com/CryptoidCoder/Twitter-API-Bot/tree/cloudrun Running on Python Anywhere @ {datetime.now().strftime("%H:%M")}'
-    print(f"Tweeting: {tweetmessage}")
+    print(f"{datetime.now().strftime('%H:%M:%S')} : Tweeting: {tweetmessage}")
     print()
     tweet(tweetmessage)
 
@@ -46,10 +46,12 @@ def tweettestmessage(): #tweet an automatic tweet message
 def tweet(text):
     # The following code uses Tweepy to create a tweet with some text:
     api.update_status(status=text)
+    print(f"{datetime.now().strftime('%H:%M:%S')} : Tweeting: {text}")
 
 #tweets message with image
 def tweetimage(pathtoimage, text):
     api.update_status_with_media(filename=pathtoimage,status=text)
+    print(f"{datetime.now().strftime('%H:%M:%S')} : Tweeting: {tweetmessage} + Image: {pathtoimage}")
 
 #tweets message with image url
 def tweetimagewithurl(imageurl, text):
@@ -58,6 +60,7 @@ def tweetimagewithurl(imageurl, text):
     open(mediapath, 'wb').write(myfile.content)
     uploadedmedia = api.media_upload(filename=mediapath)
     api.update_status_with_media(filename=mediapath,status=text)
+    print(f"{datetime.now().strftime('%H:%M:%S')} : Tweeting: {text} + Image: {imageurl}")
     os.remove(mediapath)
 
 #tweet from the que.txt file
