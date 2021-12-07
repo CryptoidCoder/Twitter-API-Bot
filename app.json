@@ -9,7 +9,6 @@
     "website": "https://CryptoidCoder.github.io/Coding-Website/",
     "repository": "https://github.com/CryptoidCoder/Twitter-API-Bot/tree/heroku",
     "logo": "https://github.com/CryptoidCoder/Twitter-API-Bot/raw/heroku/images/python-logo.jfif",
-    //"success_url": "/welcome",
     "env": {
       "API_key": {
         "description": "Twitter API Key"
@@ -23,4 +22,5 @@
       "API_token_secret": {
         "description": "Twitter API Token Secret"
       }
-    },
+    }
+  }
