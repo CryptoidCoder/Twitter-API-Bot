@@ -1,7 +1,26 @@
-{
-    "name": "CryptoidCoders-Twitter-Bot",
+  {
+    "name": "CryptoidCoder's-Twitter-Bot",
     "description": "A Twitter Bot Coded In Python For Detecting Followers/Unfollowers & Tweeting At Set Times",
+    "keywords": [
+        "python",
+        "twitter",
+        "twitter-api"
+    ],
+    "website": "https://CryptoidCoder.github.io/Coding-Website/",
     "repository": "https://github.com/CryptoidCoder/Twitter-API-Bot/tree/heroku",
     "logo": "https://github.com/CryptoidCoder/Twitter-API-Bot/raw/heroku/images/python-logo.jfif",
-    "keywords": ["python", "twitter", "twitter-api"]
-  }
+    //"success_url": "/welcome",
+    "env": {
+      "API_key": {
+        "description": "Twitter API Key"
+      },
+      "API_key_secret": {
+        "description": "Twitter API Key Secret"
+      },
+      "API_token": {
+        "description": "Twitter API Token"
+      },
+      "API_token_secret": {
+        "description": "Twitter API Token Secret"
+      }
+    },
